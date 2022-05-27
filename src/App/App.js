@@ -44,22 +44,21 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== id));
   }
 
-   const [name, setName] = useState("");
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [isLoggedin, setIsLoggedin] = useState(false);
 
    const login = (e) => {
      e.preventDefault();
-     console.log(name, email, password);
+     console.log(email, password);
      const userData = {
-       name,
+     
        email,
        password,
      };
      localStorage.setItem("token-info", JSON.stringify(userData));
      setIsLoggedin(true);
-     setName("");
+
      setEmail("");
      setPassword("");
    };
@@ -69,9 +68,15 @@ function App() {
      setIsLoggedin(false);
    };
 
+   const [data, setData] = useState(null);
+   function getData(val)
+   {
+     setData(val.target.value);
+   }
 
    
   return (
+    
     <div className="App">
       {!isLoggedin ? (
         <>
@@ -79,8 +84,8 @@ function App() {
           <form className="login__form" action="">
             <input
               type="text"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
+              onChange={getData}
+              value={data}
               placeholder="Name"
             />
             <input
@@ -101,7 +106,7 @@ function App() {
             logout
           </button>
 
-          <h1>User is logged in</h1>
+          <h1>{data} is logged in</h1>
           <h4 className="watchlist__heading">Your Watchlist</h4>
           <TodoForm addTodo={addTodo} />
           <TodoList
