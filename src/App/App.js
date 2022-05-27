@@ -28,11 +28,11 @@ function App() {
 
   function toggleComplete(id) {
     setTodos(
-      todos.map(todo => {
+      todos.map((todo) => {
         if (todo.id === id) {
           return {
             ...todo,
-            completed: !todo.completed
+            completed: !todo.completed,
           };
         }
         return todo;
@@ -41,51 +41,46 @@ function App() {
   }
 
   function removeTodo(id) {
-    setTodos(todos.filter(todo => todo.id !== id));
+    setTodos(todos.filter((todo) => todo.id !== id));
   }
 
-   const [email, setEmail] = useState("");
-   const [password, setPassword] = useState("");
-   const [isLoggedin, setIsLoggedin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-   const login = (e) => {
-     e.preventDefault();
-     console.log(email, password);
-     const userData = {
-     
-       email,
-       password,
-     };
-     localStorage.setItem("token-info", JSON.stringify(userData));
-     setIsLoggedin(true);
 
-     setEmail("");
-     setPassword("");
-   };
-
-   const logout = () => {
-     localStorage.removeItem("token-info");
-     setIsLoggedin(false);
-   };
-
-   const [data, setData] = useState(null);
-   function getData(val)
-   {
-     setData(val.target.value);
-   }
-
+  const login = (e) => {
+    e.preventDefault();
+    console.log(email, password);
+    const userData = {
+      email,
+      password,
+    };
+    localStorage.setItem("token-info", JSON.stringify(userData.email));
    
+
+    setEmail("");
+    setPassword("");
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token-info");
+
+    window.location.reload();
+  };
+;
+  
+  console.log(localStorage.getItem("token-info"));
+
   return (
-    
     <div className="App">
-      {!isLoggedin ? (
+      {localStorage.getItem("token-info") === null ? (
         <>
           <h1 className="user_m">User Management System</h1>
           <form className="login__form" action="">
             <input
               type="text"
-              onChange={getData}
-              value={data}
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
               placeholder="Name"
             />
             <input
@@ -102,11 +97,14 @@ function App() {
       ) : (
         <>
           <h1 className="user_m">User Management System</h1>
-          <button onClickCapture={logout} className="logout__button">
+          <button onClick={logout} className="logout__button">
             logout
           </button>
 
-          <h1>{data} is logged in</h1>
+          <h1>
+            {localStorage.getItem("token-info").replace(/['"]+/g, "")} is logged
+            in
+          </h1>
           <h4 className="watchlist__heading">Your Watchlist</h4>
           <TodoForm addTodo={addTodo} />
           <TodoList
