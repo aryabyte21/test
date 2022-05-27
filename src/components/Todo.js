@@ -1,5 +1,5 @@
 import { ListItem, Typography } from "@material-ui/core";
-
+import "./Todo.css";
 import React from "react";
 
 function Todo({ todo, removeTodo }) {
@@ -9,17 +9,41 @@ function Todo({ todo, removeTodo }) {
   }
 
   return (
-    <ListItem style={{ display: "flex" }}>
+    <ListItem style={{ display: "flex", margin: "10px" }}>
       <Typography
         variant="body1"
         style={{
-          textDecoration: todo.completed ? "line-through" : null
+          textDecoration: todo.completed ? "line-through" : null,
+          margin: "10px",
         }}
       >
-        {todo.movie} {todo.genre} {todo.rating}
+        {" "}
+        {todo.movie}
       </Typography>
-      <div style={{color:"red"}} onClick={handleRemoveClick}>
-         . Delete
+
+      <Typography
+        variant="body1"
+        style={{
+          textDecoration: todo.completed ? "line-through" : null,
+          margin: "10px",
+        }}
+      >
+        {" "}
+        {todo.genre}
+      </Typography>
+
+      <Typography
+        variant="body1"
+        style={{
+          textDecoration: todo.completed ? "line-through" : null,
+          margin: "10px",
+        }}
+      >
+        {" "}
+        {todo.rating}
+      </Typography>
+      <div style={{ color: "red" }} onClick={handleRemoveClick}>
+        Delete
       </div>
     </ListItem>
   );

@@ -1,4 +1,3 @@
-import Typography from "@material-ui/core/Typography";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import TodoForm from "../components/TodoForm";
@@ -45,17 +44,73 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== id));
   }
 
+   const [name, setName] = useState("");
+   const [email, setEmail] = useState("");
+   const [password, setPassword] = useState("");
+   const [isLoggedin, setIsLoggedin] = useState(false);
+
+   const login = (e) => {
+     e.preventDefault();
+     console.log(name, email, password);
+     const userData = {
+       name,
+       email,
+       password,
+     };
+     localStorage.setItem("token-info", JSON.stringify(userData));
+     setIsLoggedin(true);
+     setName("");
+     setEmail("");
+     setPassword("");
+   };
+
+   const logout = () => {
+     localStorage.removeItem("token-info");
+     setIsLoggedin(false);
+   };
+
+
+   
   return (
     <div className="App">
-      <Typography style={{ padding: 16 }} variant="h1">
-        React Todo
-      </Typography>
-      <TodoForm addTodo={addTodo} />
-      <TodoList
-        todos={todos}
-        removeTodo={removeTodo}
-        toggleComplete={toggleComplete}
-      />
+      {!isLoggedin ? (
+        <>
+          <h1 className="user_m">User Management System</h1>
+          <form className="login__form" action="">
+            <input
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              placeholder="Name"
+            />
+            <input
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              placeholder="Password"
+            />
+            <button type="submit" onClick={login}>
+              Login
+            </button>
+          </form>
+        </>
+      ) : (
+        <>
+          <h1 className="user_m">User Management System</h1>
+          <button onClickCapture={logout} className="logout__button">
+            logout
+          </button>
+
+          <h1>User is logged in</h1>
+          <h4 className="watchlist__heading">Your Watchlist</h4>
+          <TodoForm addTodo={addTodo} />
+          <TodoList
+            todos={todos}
+            removeTodo={removeTodo}
+            toggleComplete={toggleComplete}
+          />
+        </>
+      )}
     </div>
   );
 }

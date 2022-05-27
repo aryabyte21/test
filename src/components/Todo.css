@@ -1,0 +1,14 @@
+table {
+  position: absolute;
+  top: 400px;
+  width: 800px;
+  height: 200px;
+}
+
+th {
+}
+
+td {
+  text-align: center;
+  padding: 10px;
+}

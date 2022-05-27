@@ -57,3 +57,63 @@ li {
     transform: rotate(360deg);
   }
 }
+
+.user_m{
+  font-size: 35px;
+  text-align: center;
+  justify-content: center;
+  padding: 30px;
+  background: #071c44;
+  border-radius: 40px;
+  color: white;
+  width: 559px;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login__form > input {
+  min-width: 380px;
+  padding: 20px 0;
+  padding-left: 15px;
+  margin-bottom: 10px;
+  outline: none;
+  border: 5px solid #fff;
+  background-color: #c4c4c4;
+  border-radius: 20px;
+  font-size: 20px;
+}
+
+.login__form > button {
+  align-self: center;
+  background: #071c44;
+  border-radius: 60px;
+  font-size: 20px;
+  color: white;
+  width: 176px;
+  height: 79px;
+}
+
+.logout__button {
+  position: absolute;
+  padding: 30px;
+  left: 1100px;
+  top: 190px;
+  background: #ea1313;
+  border-radius: 30px;
+  color: white;
+  font-size: 20px;
+}
+.watchlist__heading {
+  position: relative;
+  padding: 20px;
+  padding-right: 30px;
+  padding-left: 30px;
+  /* left: 647px;
+  top: 350px; */
+  color: white;
+  background: #086fb9;
+  border-radius: 20px;
+}
